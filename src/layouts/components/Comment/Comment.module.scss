@@ -1,0 +1,147 @@
+
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 24px 12px;
+}
+
+.title span {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    padding: 24px 12px;
+}
+
+.comment-item {
+    background-color: var(--background-color);
+    margin: 12px 0 16px 0;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    background-color: var(--white-color);
+}
+
+
+.client {
+    background-color: var(--white-color);
+}
+
+.user {
+    display: flex;
+    align-items: flex-start;
+    background-color: var(--background-color);
+    border-radius: 16px;
+}
+
+.parent {
+    margin-bottom: 12px;
+}
+
+.children {
+    margin-left: 24px;
+}
+
+.children-wrapper {
+    margin-bottom: 12px;
+}
+
+.user-name {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    padding: 6px;
+}
+.user-img {
+    margin: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.reply {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+.reply-text {
+    margin-right: 48px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 6px 24px;
+    
+    &:hover {
+        cursor: pointer;
+        color: var(--primary-color);
+    }
+    background-color: var(--background-color);
+    border-radius: 12px;
+}
+
+.comment-text {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 6px;
+}
+
+.add-comment {
+    margin: 24px 0 24px 0;
+    background-color:var(--background-color);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.label {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 12px 0;
+    background-color: var(--white-color);
+}
+.input {
+    border: 1px solid #ccc;
+    padding: 12px;
+    outline: none;
+    &:focus {
+        border-color: var(--primary-color);
+    }
+    font-family: 'roboto', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.btn {
+    width: 120px;
+    align-self: flex-end;
+    margin: 24px 36px;
+}
+
+
+.delete {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 12px;
+    &:hover {
+        color: var(--primary-color);
+    }
+}
+
+.action {
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--white-color);
+}

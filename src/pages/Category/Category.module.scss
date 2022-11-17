@@ -1,0 +1,229 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--background-color);
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+    background-color: var(--white-color);
+    padding: 12px;
+    flex-direction: column;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.header-title {
+    display: flex;
+    justify-content: center;
+    background-color: var(--white-color);
+    margin-bottom: 12px;
+}
+.title { 
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 24px 8px;
+    align-self: center;
+}
+
+.content {
+    background-color: var(--background-color);
+}
+.header {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    padding: 24px 8px;
+}
+
+.category-main {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.main-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 8px 14px 0 rgba(0,0,0,0.19);
+    border-radius: 2px;
+}
+
+.action {
+    margin-top: 24px;
+}
+.category-child-body {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.children {
+    margin: 12px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.children-header {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 8px 14px 0 rgba(0,0,0,0.19);
+}
+
+.child-btn-delete {
+    margin-top: 12px;
+}
+.list {
+    padding: 0;
+    background-color: var(--background-color);
+    list-style: none;
+    margin: 0;
+}
+
+.img {
+    width: 68px;
+    height: 68px;
+    object-fit: cover;
+}
+
+.text {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 4px 8px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 6px 24px;
+}
+.input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    min-width: 400px;
+    &:focus {
+        border-color: var(--primary-color);
+    }
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 6px 12px;
+
+}
+.btn-update {
+    padding: 0 24px;
+}
+.add-title {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    padding: 12px 8px;
+}
+
+.form {
+    background-color: var(--white-color);
+    margin-bottom: 48px;
+    padding: 12px 0;
+}
+
+.form-group {
+    background-color: var(--white-color);
+    margin-bottom: 12px;
+    padding: 8px;
+}
+
+.label {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 6px 24px;
+}
+
+.label-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border: 1px dotted #ccc;
+    cursor: pointer;
+}
+
+.label-img span {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    line-height: 2.2rem;
+    padding: 6px;
+    text-align: center;
+}
+
+.img-preview {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+
+.add-btn {
+    margin-left: 24px;
+
+}
+
+// model add category children
+.model {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.model-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.model-close {
+    width: 36px;
+    padding: 8px;
+    justify-self: flex-end;
+    &:hover {
+        background-color: #ccc;
+    }
+}
+.icon {
+    width: 24px;
+    font-size: 400;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.add-category {
+    background-color: var(--background-color);
+    width: 600px;
+    height: 400px;
+}

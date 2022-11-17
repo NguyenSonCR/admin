@@ -1,0 +1,77 @@
+.title {
+    text-align: center;
+    margin-top: 24px;
+    padding: 12px 4px;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.wrapper {
+    padding: 0 12px;
+}
+
+.text {
+    padding: 12px 4px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.label-avatar {
+    margin: 12px 0;
+    display: block;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    border: 1px dotted #ccc;
+}
+
+.model {
+    padding: 12px 0;
+    width: 50vh;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-label {
+    padding: 8px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.form-input {
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    &:focus {
+        border-color: var(--primary-color);
+    }
+}
+
+.form-btn {
+    margin-top: 12px;
+}
+
+.back {
+    margin-right: 12px;
+}
+
+.form-warning {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: red;
+    padding: 4px;
+}

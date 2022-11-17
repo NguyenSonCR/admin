@@ -1,0 +1,42 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    padding: 9px 16px;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(22, 24, 23, 0.03);
+    }
+}
+.img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.info {
+    flex: 1;
+    margin-left: 12px;
+}
+
+.name {
+    padding: 2px;
+    font-size: 1.3rem;
+    text-align: left;
+    color: var(--primary-color);
+    font-weight: 300;
+    line-height: 1.8rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+.id {
+    padding: 2px;
+    display: block;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: 300;
+    line-height: 1.8rem;
+    text-align: left;
+}

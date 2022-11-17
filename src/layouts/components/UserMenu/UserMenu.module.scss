@@ -1,0 +1,90 @@
+.user {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 24px 12px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 0 4px;
+}
+
+.user-edit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.edit-icon {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 4px;
+}
+
+.action {
+    margin-left: 12px;
+}
+.user-edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigate {
+    padding: 24px 12px;
+    margin-bottom: 24px;
+}
+
+.navigate-list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 8px;
+}
+.list-icon {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.icon {
+    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.list-text {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 0 4px;
+    cursor: pointer;
+}
+
+.user-list {
+    padding-top: 8px;
+    margin: 0;
+    list-style: none;
+}
+
+.user-item {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 8px 4px;
+}

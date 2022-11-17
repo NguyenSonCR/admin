@@ -1,0 +1,21 @@
+.title {
+    padding: 24px 4px;
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: var(--text-color);
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.text {
+    padding: 12px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}

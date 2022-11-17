@@ -1,0 +1,51 @@
+.purchase {
+    background-color: var(--background-color);
+}
+
+.body {
+    min-height: 70vh;
+    background-color: var(--background-color);
+}
+
+.header {
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.header-tab {
+    min-height: 48px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-title {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2rem;
+    cursor: pointer;
+    &:hover {
+        color: var(--primary-color);
+    }
+}
+
+.active {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.active .tab-title {
+    color: var(--primary-color);
+}
+
+.content {
+    background-color: var(--background-color);
+    min-height: 70vh;
+    margin-bottom: 24px;
+}

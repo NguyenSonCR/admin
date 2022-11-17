@@ -1,0 +1,72 @@
+.wrapper {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.2);
+    &:hover {
+        box-shadow: 0 0.2rem 1.6rem 0 rgba(0, 0, 0, 0.1);
+    }
+}
+
+.main {
+    width: 100%;
+    display: flex;
+}
+
+.title {
+    padding: 12px 16px;
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+}
+
+.header {
+    line-height: 2rem;
+    height: 4rem;
+    padding: 0 8px;
+    margin: 8px 0;
+    text-align: justify;
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.content {
+    font-weight: 400;
+    line-height: 2rem;
+    height: 4rem;
+    padding: 0 8px;
+    margin: 8px 0;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    text-align: justify;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+}
+.img {
+    height: 200px;
+    object-fit: cover;
+    flex: 1;
+    margin: 12px 0;
+}
+
+.action {
+    padding: 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+.btn-updated {
+    margin-right: 24px;
+}
+
+.text {
+    flex: 3;
+    padding-left: 12px;
+}

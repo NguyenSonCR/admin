@@ -1,0 +1,106 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+    padding: 12px
+}
+.title {
+    padding: 24px 4px;
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: var(--text-color);
+}
+
+.header {
+    padding: 12px;
+    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 24px;
+}
+
+.user-list {
+    padding: 8px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.user-list:first-child {
+    color: var(--primary-color);
+}
+.wrapper {
+    height: calc(100% - 80px);
+}
+
+.order {
+    margin-bottom: 24px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+.text {
+    padding: 12px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.product {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 4px 8px;
+}
+
+.product-header {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+}
+
+.product-img {
+    border: 1px solid #ccc;
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+}
+
+.product-list {
+    flex: 1;
+    padding: 4px 12px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.action {
+    padding: 0 12px 12px 12px;
+}
+
+.order-choose {
+    display: flex;
+    align-items: center;
+}
+.label {
+    display: block;
+    padding: 12px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.option {
+    padding: 4px;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 300;
+}

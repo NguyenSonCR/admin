@@ -1,0 +1,62 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title { 
+    font-size: 2.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 24px 8px;
+    align-self: center;
+}
+
+.header {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    padding: 24px 8px;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding-left: 12px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 6px 24px;
+    border: 1px solid #ccc;
+}
+.input {
+    border: 1px solid #ccc;
+    padding: 4px;
+    min-width: 300px;
+    
+}
+.btn-update {
+    margin-top: 24px;
+}
+.add-title {
+    margin-top: 24px;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    padding: 24px 8px;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+}
+
+.add-btn {
+    margin-left: 24px;
+
+}

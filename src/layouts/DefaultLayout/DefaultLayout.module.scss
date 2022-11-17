@@ -1,0 +1,21 @@
+.app {
+    background-color: rgba(46, 168, 101, 0.03);
+}
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+.container {
+    padding-top: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    min-height: 580px;
+    background-color: var(--white-color);
+    background-clip: content-box;
+}

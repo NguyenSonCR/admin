@@ -1,0 +1,239 @@
+
+.header {
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: flex-end;
+    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: 400;
+    background-color: var(--white-color);
+}
+
+.main {
+    background-color: var(--white-color);
+}
+
+.shipping {
+    position: relative;
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-right: 24px;
+}
+.shipping::after {
+    position: absolute;
+    content: '';
+    right: -12px;
+    border-right: 1px solid #ccc;
+    height: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.header-text {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-right: 36px;
+}
+
+.body {
+    padding: 24px 0;
+    margin: 0 12px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between
+}
+
+
+.info {
+    display: flex;
+    align-items: center;
+}
+
+.img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+}
+
+.price-text {
+    padding: 4px;
+    margin-right: 24px;
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+
+}
+
+.description {
+    padding-left: 12px;
+}
+
+.text {
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.money {
+    padding: 24px 0;
+    margin: 0 12px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.money-text span {
+    color: var(--primary-color);
+}
+
+.action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24px 0;
+    margin: 0 12px;
+}
+
+.btn {
+    margin-right: 36px;
+    margin-left: 24px;
+}
+
+.title {
+    padding: 24px 4px;
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: var(--text-color);
+}
+
+.user-list {
+    padding: 8px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.user-list:first-child {
+    color: var(--primary-color);
+}
+.wrapper {
+    background-color: var(--background-color);
+    min-height: 60vh;
+}
+
+.order {
+    margin-bottom: 24px;
+    border-radius: 2px;
+}
+
+.text {
+    padding: 12px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.product {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 4px 8px;
+}
+
+.product-header {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+}
+
+.product-img {
+    border: 1px solid #ccc;
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+}
+
+.product-list {
+    flex: 1;
+    padding: 4px 12px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.action {
+    padding: 0 12px 12px 12px;
+}
+
+.action-state {
+    margin-right: 36px;
+}
+
+.state-text {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+    padding: 6px;
+}
+.order-choose {
+    display: flex;
+    align-items: center;
+}
+.label {
+    display: block;
+    padding: 12px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.option {
+    padding: 4px;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 300;
+}
+
+
+.shipper {
+    min-width: 600px;
+    padding: 8px 0;
+}
+.shipper-label {
+    display: block;
+    padding: 8px;
+}
+.shipper-input {
+    border: 1px solid #ccc;
+    &:focus {
+        border-color: var(--primary-color);
+
+    }
+    width: 100%;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+    padding: 8px;
+    padding-left: 12px;
+    margin-bottom: 12px;
+}
+
+.no-list {
+    display: flex;
+    justify-content: center;
+    height: 60vh;
+    align-items: center;
+    background-color: var(--white-color);
+}
+
+.no-list-text {
+    font-size: 1.6rem;
+    font-weight: 400;
+    padding: 8px;
+    color: var(--primary-color)
+}

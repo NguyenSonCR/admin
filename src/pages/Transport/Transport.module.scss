@@ -1,0 +1,46 @@
+.header-title {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    padding: 12px;
+    margin: 12px 0;
+}
+
+.tranport {
+    margin:  6px 12px;
+}
+
+.info {
+    background-color: var(--background-color);
+}
+
+.action {
+    margin: 6px 0 12px 0;
+}
+
+.tranport-text {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 4px 12px;
+}
+
+.new-tranport {
+    margin: 24px 12px;
+}
+
+.input {
+    border: 1px solid #ccc;
+    padding: 4px 4px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    margin-left: 12px;
+    &:focus {
+        border-color: var(--primary-color);
+    }
+}
+
+.form-group {
+    padding: 12px 0;
+}

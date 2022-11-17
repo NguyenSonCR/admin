@@ -1,0 +1,70 @@
+.wrapper {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.03);
+    justify-content: center;
+    align-items: center; 
+    z-index: 12;
+    animation: fadeIn linear 0.1s;
+
+}
+.body {
+    position: absolute;
+    border-radius: 4px;
+    top: 0;
+    margin: auto;
+    width: 300px;
+    height: 140px;
+    background-color: var(--white-color);
+    animation: growth ease-in 0.3s;
+    --growth-from: 0.7;
+    --growth-to: 1;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 8px 14px 0 rgba(0,0,0,0.19);
+    border: 1px solid var(--primary-color);;
+}
+
+.title {
+    text-align: justify;
+    line-height: 2.2rem;
+    padding: 12px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.action {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+    margin-top: 24px;
+    padding: 0 8px;
+}
+
+.btn-success {
+    margin: 0 12px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes growth {
+    from {
+        opacity: 0;
+        top: -100px;
+    }
+    to {
+        opacity: 1;
+        top: 0
+    }
+}
