@@ -25,7 +25,7 @@ function CreateProduct() {
     // eslint-disable-next-line
   }, []);
 
-  const { addProduct, uploadFileGoogle, uploadFilesGoogle } = useContext(ProductContext);
+  const { addProduct, uploadFile, uploadFiles } = useContext(ProductContext);
 
   const [formValue, setFormValue] = useState({
     name: '',
@@ -199,8 +199,8 @@ function CreateProduct() {
     });
 
     try {
-      const response = await uploadFilesGoogle(data);
-      const responseSingle = await uploadFileGoogle(dataSingle);
+      const response = await uploadFiles(data);
+      const responseSingle = await uploadFile(dataSingle);
       return { response, responseSingle };
     } catch (error) {
       console.log(error);

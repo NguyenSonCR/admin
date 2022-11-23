@@ -21,8 +21,8 @@ function UpdateProduct() {
     productState: { product },
     getProduct,
     updateProduct,
-    uploadFileGoogle,
-    uploadFilesGoogle,
+    uploadFile,
+    uploadFiles,
   } = useContext(ProductContext);
 
   const {
@@ -226,7 +226,7 @@ function UpdateProduct() {
     dataSingle.append('file', newFile);
 
     try {
-      const responseSingle = await uploadFileGoogle(dataSingle);
+      const responseSingle = await uploadFile(dataSingle);
       return responseSingle;
     } catch (error) {
       console.log(error);
@@ -243,7 +243,7 @@ function UpdateProduct() {
     });
 
     try {
-      const response = await uploadFilesGoogle(data);
+      const response = await uploadFiles(data);
       return response;
     } catch (error) {
       console.log(error);

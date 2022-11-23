@@ -15,7 +15,7 @@ function Profile() {
     changePassword,
   } = useContext(AuthContext);
   const { username, img } = user;
-  const { uploadFileGoogle } = useContext(ProductContext);
+  const { uploadFile } = useContext(ProductContext);
 
   const {
     toastState: { toastList },
@@ -50,7 +50,7 @@ function Profile() {
     dataSingle.append('file', newFile);
 
     try {
-      const response = await uploadFileGoogle(dataSingle);
+      const response = await uploadFile(dataSingle);
       return response;
     } catch (error) {
       console.log(error);

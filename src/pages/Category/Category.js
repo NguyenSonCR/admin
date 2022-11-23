@@ -22,7 +22,7 @@ function Category() {
     name: '',
   });
 
-  const { uploadFileGoogle } = useContext(ProductContext);
+  const { uploadFile } = useContext(ProductContext);
   const { name } = formValue;
   const {
     categoryState: { categories, category, categoriesLoading },
@@ -127,7 +127,7 @@ function Category() {
     data.append('file', newFile);
 
     try {
-      const response = await uploadFileGoogle(data);
+      const response = await uploadFile(data);
       return response;
     } catch (error) {
       console.log(error);

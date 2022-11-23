@@ -53,32 +53,18 @@ const ProductContextProvider = ({ children }) => {
 
   const uploadFile = async (data) => {
     try {
-      const response = await axiosJWT.post(`${apiUrl}/upload`, data);
-      if (response.data.success) {
-        console.log(response.data);
-      }
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // upload file with google storage
-
-  const uploadFileGoogle = async (data) => {
-    try {
-      const response = await axiosJWT.post(`${apiUrl}/upload/google-storage`, data);
-      return response.data;
+      const response = await axiosJWT.post(`${apiUrl}/upload/server`, data);
+      if (response.data.success) return response.data;
     } catch (error) {
       console.log(error);
     }
   };
 
   // multiple
-  const uploadFilesGoogle = async (data) => {
+  const uploadFiles = async (data) => {
     try {
-      const response = await axiosJWT.post(`${apiUrl}/upload/google-storage/multiple`, data);
-      return response.data;
+      const response = await axiosJWT.post(`${apiUrl}/upload/server/multiple`, data);
+      if (response.data.success) return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -239,8 +225,7 @@ const ProductContextProvider = ({ children }) => {
     deleteComment,
     sendCommentChildren,
     uploadFile,
-    uploadFileGoogle,
-    uploadFilesGoogle,
+    uploadFiles,
   };
 
   return <ProductContext.Provider value={productContextData}>{children}</ProductContext.Provider>;
