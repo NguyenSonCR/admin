@@ -24,6 +24,7 @@ import Order from '~/pages/Order';
 import OrderDone from '~/pages/OrderDone';
 import PostTrash from '~/pages/PostTrash';
 import Transport from '~/pages/Transport';
+import Themes from '~/pages/Themes';
 
 const privateRoutes = [
   { path: config.routes.landing, component: Landing },
@@ -54,6 +55,8 @@ const privateRoutes = [
 
   { path: config.routes.category, component: Category },
   { path: config.routes.updatedCategory, component: UpdatedCategory },
+
+  { path: config.routes.theme, component: Themes },
 ];
 
 const publicRoutes = [

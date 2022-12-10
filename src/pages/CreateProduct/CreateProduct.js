@@ -30,7 +30,6 @@ function CreateProduct() {
   const [formValue, setFormValue] = useState({
     name: '',
     description: '',
-    productId: '',
     category: '',
     categoryChild: '',
     gender: '',
@@ -40,8 +39,7 @@ function CreateProduct() {
     saleOffLable: '',
   });
 
-  const { name, description, productId, category, categoryChild, gender, priceOld, priceCurrent, saleOffLable } =
-    formValue;
+  const { name, description, category, categoryChild, gender, priceOld, priceCurrent, saleOffLable } = formValue;
 
   const onChangeForm = (event) => {
     event.preventDefault();
@@ -211,7 +209,7 @@ function CreateProduct() {
 
   const addProductSubmit = async (event) => {
     event.preventDefault();
-    if (!name || !productId || !description) {
+    if (!name || !description) {
       addToast({
         id: toastList.length + 1,
         title: 'Thất bại',
@@ -244,7 +242,6 @@ function CreateProduct() {
           setFormValue({
             name: '',
             description: '',
-            productId: '',
             category: '',
             categoryChild: '',
             gender: '',
@@ -303,22 +300,6 @@ function CreateProduct() {
               id="name"
               placeholder=""
               name="name"
-            />
-          </div>
-
-          <div className={cx('create__form-all')}>
-            <label className={cx('create__form-all-lable')} htmlFor="productId">
-              Mã sản phẩm:
-            </label>
-            <input
-              spellCheck="false"
-              type="text"
-              className={cx('create__form-all-input')}
-              id="productId"
-              placeholder=""
-              name="productId"
-              onChange={onChangeForm}
-              value={productId}
             />
           </div>
 

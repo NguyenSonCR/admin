@@ -7,6 +7,7 @@ import {
   ADD_CATEGORY_CHILDREN,
   DELETE_CATEGORY_CHILDREN,
   SET_CATEGORY_CHILD,
+  UPDATED_CATEGORY,
 } from '~/contexts/constants';
 
 export const categoryReducer = (state, action) => {
@@ -34,6 +35,15 @@ export const categoryReducer = (state, action) => {
       };
 
     case ADD_CATEGORY_CHILDREN:
+      return {
+        ...state,
+        categories: state.categories.map((category) => {
+          if (category._id === payload._id) return payload;
+          return category;
+        }),
+      };
+
+    case UPDATED_CATEGORY:
       return {
         ...state,
         categories: state.categories.map((category) => {

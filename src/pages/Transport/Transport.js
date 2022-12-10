@@ -73,14 +73,16 @@ function Tranport() {
                 <p className={cx('tranport-text')}>Giá: {item.price}</p>
               </div>
               <div className={cx('action')}>
-                <Button
-                  deleted
-                  onClick={() => {
-                    deleteTransport(item._id);
-                  }}
-                >
-                  Xóa
-                </Button>
+                {transports.length > 1 && (
+                  <Button
+                    deleted
+                    onClick={() => {
+                      deleteTransport(item._id);
+                    }}
+                  >
+                    Xóa
+                  </Button>
+                )}
               </div>
             </div>
           ))}

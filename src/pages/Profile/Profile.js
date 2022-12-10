@@ -71,7 +71,7 @@ function Profile() {
           addToast({
             id: toastList.length + 1,
             title: 'Thành công',
-            content: response.message,
+            content: res.message,
             type: 'success',
           });
           setAvatar();

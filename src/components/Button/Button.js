@@ -17,6 +17,7 @@ function Button({
   deleted = false,
   leftIcon,
   full,
+  fill,
   rightIcon,
   className,
   children,
@@ -45,6 +46,7 @@ function Button({
     primary,
     outline,
     small,
+    fill,
     large,
     text,
     disable,
@@ -76,6 +78,7 @@ Button.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
+  fill: PropTypes.bool,
 };
 
 export default Button;

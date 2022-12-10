@@ -1,0 +1,95 @@
+.wrapper {
+    background-color: var(--background-color);
+}
+.themes {
+    padding: 12px;
+    background-color: var(--white-color);
+}
+
+.themes-title {
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1.6rem;
+    padding: 12px;
+    background-color: var(--white-color);
+}
+
+.default-theme {
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1.6rem;
+    padding: 4px 12px;
+}
+
+.theme-wrapper {
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    margin: 4px 0;
+}
+.theme-color {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.theme-name {
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1.6rem;
+    padding: 4px 12px;
+}
+
+.action-choose {
+    margin: 0 12px;
+}
+
+.new {
+    background-color: var(--white-color);
+    padding: 24px 12px;
+    margin: 24px 0;
+}
+.new-title {
+    background-color: var(--white-color);
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1.6rem;
+    padding: 4px 12px;
+}
+
+.form {
+    margin: 12px 0;
+    background-color: var(--white-color);
+}
+
+.form-group {
+    padding: 12px;
+}
+
+.label {
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1.6rem;
+    padding: 4px 12px;
+}
+
+.input-text {
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1.6rem;
+    padding: 4px 12px;
+    &:focus {
+        border-color: var(--primary-color);
+    }
+}
+
+.input {
+    margin: 0 12px;
+}
+
+.btn-submit {
+    margin: 12px 0 48px 48px;
+}

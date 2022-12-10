@@ -32,6 +32,7 @@ function Category() {
     addCategoryChild,
     chooseCategory,
     deleteCategoryChild,
+    updatedCategory,
   } = useContext(CategoryContext);
 
   useEffect(() => {
@@ -74,7 +75,7 @@ function Category() {
   const handleDeleteCategoryChildren = async ({ slug, categoryChildren }) => {
     try {
       const response = await deleteCategoryChild({ slug, categoryChildren });
-      console.log(response);
+
       if (response.success) {
         addToast({
           id: toastList.length + 1,
@@ -232,6 +233,89 @@ function Category() {
   // alert
   const { alertShow } = useContext(AlertContext);
 
+  // updated category
+  const [updated, setUpdated] = useState(false);
+
+  const handelCloseModelUpdated = () => {
+    setUpdated(false);
+    setImgPreviewCategoryUpdated(false);
+  };
+
+  const [imgPreviewCategoryUpdated, setImgPreviewCategoryUpdated] = useState();
+  const [fileUpdated, setFileUpdated] = useState();
+
+  const onChangeImgCategoryUpdated = (event) => {
+    const file = event.target.files[0];
+    setFileUpdated(file);
+    setImgPreviewCategoryUpdated(URL.createObjectURL(file));
+  };
+
+  const [nameCategoryUpdated, setNameCategoryUpdated] = useState('');
+
+  const handleUpdatedCategory = (category) => {
+    chooseCategory(category);
+    setNameCategoryUpdated(category.name);
+    setUpdated(true);
+    setImgPreviewCategoryUpdated(category.img);
+  };
+
+  const onChangeNameCategoryUpdated = (event) => {
+    event.preventDefault();
+    setNameCategoryUpdated(event.target.value);
+  };
+
+  const handleUpdatedCategorySubmit = async (category) => {
+    if (!fileUpdated) {
+      const response = await updatedCategory({ id: category._id, name: nameCategoryUpdated, img: category.img });
+      if (response.success) {
+        addToast({
+          id: toastList.length + 1,
+          title: 'Thành công',
+          content: response.message,
+          type: 'success',
+        });
+        setUpdated(false);
+        setFileUpdated();
+        setNameCategoryUpdated('');
+      } else {
+        addToast({
+          id: toastList.length + 1,
+          title: 'Thất bại',
+          content: response.message,
+          type: 'error',
+        });
+      }
+    } else {
+      const responseImg = await handleUploadFile(fileUpdated);
+      if (!responseImg.success) {
+        console.log(responseImg.message);
+        return;
+      } else {
+        const res = await updatedCategory({ id: category._id, name: nameCategoryUpdated, img: responseImg.result });
+        if (res.success) {
+          addToast({
+            id: toastList.length + 1,
+            title: 'Thành công',
+            content: res.message,
+            type: 'success',
+          });
+          setUpdated(false);
+          setFileUpdated();
+          setNameCategoryUpdated('');
+        } else {
+          addToast({
+            id: toastList.length + 1,
+            title: 'Thất bại',
+            content: res.message,
+            type: 'error',
+          });
+        }
+      }
+    }
+  };
+
+  // return
+
   let body = null;
   if (categoriesLoading) {
     body = <Spinner />;
@@ -244,22 +328,97 @@ function Category() {
           </div>
           <ul className={cx('list')}>
             {categories &&
-              categories.map((category, index) => (
+              categories.map((cate, index) => (
                 <div key={index} className={cx('body')}>
                   <div className={cx('category')}>
                     <div className={cx('category-main')}>
                       <div className={cx('main-info')}>
-                        <img className={cx('img')} src={category.img} alt={category.name}></img>
-                        <p className={cx('text')}>{category.name}</p>
+                        <img className={cx('img')} src={cate.img} alt={cate.name}></img>
+                        <p className={cx('text')}>{cate.name}</p>
                       </div>
                       <div className={cx('main-btn')}>
+                        <Button primary onClick={() => handleUpdatedCategory(cate)}>
+                          Chỉnh sửa
+                        </Button>
+                        {updated && (
+                          <div
+                            className={cx('model')}
+                            onClick={() => {
+                              handelCloseModelUpdated();
+                            }}
+                          >
+                            <div
+                              className={cx('add-category')}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                              }}
+                            >
+                              <div className={cx('model-header')}>
+                                <p className={cx('add-title')}>Chỉnh sửa danh mục</p>
+                                <div
+                                  className={cx('model-close')}
+                                  onClick={() => {
+                                    handelCloseModelUpdated();
+                                  }}
+                                >
+                                  <FontAwesomeIcon className={cx('icon')} icon={faClose}></FontAwesomeIcon>
+                                </div>
+                              </div>
+
+                              <form className={cx('form')}>
+                                <div className={cx('form-group')}>
+                                  <label className={cx('label')} htmlFor="nameCategoryUpdated">
+                                    Tên danh mục:
+                                  </label>
+                                  <input
+                                    required
+                                    spellCheck={false}
+                                    className={cx('input')}
+                                    value={nameCategoryUpdated}
+                                    type="text"
+                                    id="nameCategoryUpdated"
+                                    name="nameCategoryUpdated"
+                                    onChange={onChangeNameCategoryUpdated}
+                                  ></input>
+                                </div>
+                                <div className={cx('form-group')}>
+                                  <label className={cx('label-img')} htmlFor="updatedCategoryImg">
+                                    {imgPreviewCategoryUpdated ? (
+                                      <img className={cx('img')} src={imgPreviewCategoryUpdated} alt=""></img>
+                                    ) : (
+                                      <img className={cx('img')} src={category.img} alt={category.name}></img>
+                                    )}
+                                  </label>
+                                  <input
+                                    hidden
+                                    className={cx('input')}
+                                    type="file"
+                                    id="updatedCategoryImg"
+                                    name="updatedCategoryImg"
+                                    onChange={onChangeImgCategoryUpdated}
+                                  ></input>
+                                </div>
+                                <Button
+                                  primary
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    handleUpdatedCategorySubmit(category);
+                                  }}
+                                  className={cx('add-btn')}
+                                >
+                                  Lưu lại
+                                </Button>
+                              </form>
+                            </div>
+                          </div>
+                        )}
                         <Button
                           deleted
                           className={cx('delete-btn')}
                           onClick={() => {
                             alertShow({
                               title: 'Bạn có muốn xóa danh mục sản phẩm này không?',
-                              data: category._id,
+                              data: cate._id,
                               successFunction: deleteCategory,
                             });
                           }}
@@ -269,8 +428,8 @@ function Category() {
                       </div>
                     </div>
                     <div className={cx('category-child-body')}>
-                      {category.children.length > 0 &&
-                        category.children.map((categoryChildren, index) => (
+                      {cate.children.length > 0 &&
+                        cate.children.map((categoryChildren, index) => (
                           <div className={cx('children')} key={index}>
                             <div className={cx('children-header')}>
                               <img
@@ -282,7 +441,7 @@ function Category() {
                             </div>
                             <div
                               className={cx('child-btn-delete')}
-                              onClick={() => handleDeleteCategoryChildren({ slug: category.slug, categoryChildren })}
+                              onClick={() => handleDeleteCategoryChildren({ slug: cate.slug, categoryChildren })}
                             >
                               <Button deleted>Xóa</Button>
                             </div>
@@ -293,7 +452,7 @@ function Category() {
 
                   <div>
                     <div className={cx('action')}>
-                      <Button primary onClick={() => handleSetModel(category)}>
+                      <Button primary onClick={() => handleSetModel(cate)}>
                         Thêm mới danh mục con
                       </Button>
                     </div>
@@ -324,7 +483,7 @@ function Category() {
                 <label className={cx('label-img')} htmlFor="img">
                   {!imgPreview && <span>Chọn hình ảnh</span>}
                   {imgPreview && (
-                    <img className={cx('img-preview')} src={imgPreview.preview && imgPreview.preview}></img>
+                    <img className={cx('img-preview')} alt="" src={imgPreview.preview && imgPreview.preview}></img>
                   )}
                 </label>
                 <input hidden className={cx('input')} type="file" id="img" name="img" onChange={onChangeImg}></input>
@@ -380,7 +539,11 @@ function Category() {
                   <label className={cx('label-img')} htmlFor="childrenImg">
                     {!imgChildPreview && <span>Chọn hình ảnh</span>}
                     {imgChildPreview && (
-                      <img className={cx('img-preview')} src={imgChildPreview.preview && imgChildPreview.preview}></img>
+                      <img
+                        className={cx('img-preview')}
+                        alt=""
+                        src={imgChildPreview.preview && imgChildPreview.preview}
+                      ></img>
                     )}
                   </label>
                   <input

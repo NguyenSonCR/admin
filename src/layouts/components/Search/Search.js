@@ -45,7 +45,7 @@ function Search() {
         (product) =>
           product.description.toLowerCase().includes(searchValue) ||
           product.name.toLowerCase().includes(searchValue) ||
-          product.productId.toLowerCase().includes(searchValue),
+          product._id.toLowerCase().includes(searchValue),
       );
       // const result = await searchServices.search(debouncedValue);
       setSearchResult(result);

@@ -6,11 +6,23 @@ import { OrderContext } from '~/contexts/OrderContext';
 import { useContext, useState } from 'react';
 import { ToastContext } from '~/contexts/ToastContext';
 import { ProductContext } from '~/contexts/ProductContext';
+import { TransportContext } from '~/contexts/TransportContext';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 function OrderItem({ data }) {
   const { confirmOrder, deleteSoftOrder, packedOrder, shipperOrder, transportedOrder, doneOrder } =
     useContext(OrderContext);
+
+  const {
+    transportState: { transports },
+    getTransport,
+  } = useContext(TransportContext);
+
+  useEffect(() => {
+    getTransport();
+    // eslint-disable-next-line
+  }, []);
 
   const { addBought } = useContext(ProductContext);
   const { title, orderList, type } = data;
@@ -48,11 +60,6 @@ function OrderItem({ data }) {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const [shipperValue, setShipperValue] = useState('');
-  const onChangeShipperValue = (e) => {
-    setShipperValue(e.target.value);
   };
 
   const handlePacked = async (order) => {
@@ -94,7 +101,7 @@ function OrderItem({ data }) {
         cancel: false,
         packed: true,
         shipper: true,
-        shipperOrigan: shipperValue,
+        shipperOrigan: transports && transports[0].name,
         transported: false,
         done: false,
       });
@@ -275,28 +282,14 @@ function OrderItem({ data }) {
                     </Button>
                   ) : type === 4 ? (
                     <div>
-                      <form
-                        className={cx('shipper')}
-                        onSubmit={(e) => {
-                          e.preventDefault();
+                      <Button
+                        primary
+                        onClick={() => {
                           handleShipper(order);
                         }}
                       >
-                        <label className={cx('shipper-label')} htmlFor="shipper">
-                          Thêm đơn vị vận chuyển:
-                        </label>
-                        <input
-                          spellCheck={false}
-                          required
-                          className={cx('shipper-input')}
-                          id="shipper"
-                          value={shipperValue}
-                          onChange={onChangeShipperValue}
-                        ></input>
-                        <Button type="submit" primary>
-                          Xác nhận
-                        </Button>
-                      </form>
+                        Đã vận chuyển
+                      </Button>
                     </div>
                   ) : type === 5 ? (
                     <Button

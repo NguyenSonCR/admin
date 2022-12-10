@@ -11,7 +11,7 @@ function SearchItem({ data, onClick }) {
       <img className={cx('img')} src={data.img} alt={data.img}></img>
       <div className={cx('info')}>
         <p className={cx('name')}>{data.name}</p>
-        <span className={cx('id')}>Mã sản phẩm: {data.productId}</span>
+        <span className={cx('id')}>Mã sản phẩm: {data._id}</span>
       </div>
     </Link>
   );

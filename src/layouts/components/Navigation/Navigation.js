@@ -7,6 +7,7 @@ import config from '~/config';
 
 import NavItem from './NavItem';
 import Header from './Header';
+import { faThemeco } from '@fortawesome/free-brands-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -111,6 +112,11 @@ function Navigation() {
       icon: <FontAwesomeIcon icon={faTruckFast} />,
       title: 'Vận chuyển',
       to: config.routes.transport,
+    },
+    {
+      icon: <FontAwesomeIcon icon={faThemeco} />,
+      title: 'Giao diện',
+      to: config.routes.theme,
     },
   ];
 

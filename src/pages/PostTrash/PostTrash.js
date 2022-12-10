@@ -2,11 +2,11 @@ import classNames from 'classnames/bind';
 import styles from './PostTrash.module.scss';
 import Spinner from '~/components/Spinner';
 import config from '~/config';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { PostContext } from '~/contexts/PostContext';
 import { ToastContext } from '~/contexts/ToastContext';
 import Button from '~/components/Button';
-import Alert from '~/components/Alert';
+import { AlertContext } from '~/contexts/AlertContext';
 
 const cx = classNames.bind(styles);
 function PostTrash() {
@@ -21,6 +21,8 @@ function PostTrash() {
     toastState: { toastList },
     addToast,
   } = useContext(ToastContext);
+
+  const { alertShow } = useContext(AlertContext);
 
   const handleRestore = async (id) => {
     try {
@@ -45,12 +47,6 @@ function PostTrash() {
     }
   };
 
-  const [showAlert, setShowAlert] = useState(false);
-
-  const handleDestroy = () => {
-    setShowAlert(true);
-  };
-
   useEffect(() => {
     getPostsDeleted();
     // eslint-disable-next-line
@@ -64,7 +60,6 @@ function PostTrash() {
       <div className={cx('wrapper')}>
         <p className={cx('wrapper-text')}>Thùng rác trống</p>
         <Button primary to={config.routes.posts} className={cx('link')}>
-          {' '}
           Đi tới trang quản lý bài viết
         </Button>
       </div>
@@ -83,10 +78,22 @@ function PostTrash() {
                     <p className={cx('header')}>{post.header}</p>
                     <p className={cx('content')}>{post.content}</p>
                   </div>
-                  <img className={cx('img')} src={post.img} alt={post.title} />
+                  <img className={cx('img')} src={post.img[0]} alt={post.title} />
                 </div>
                 <div className={cx('action')}>
-                  <Button deleted onClick={() => handleDestroy(post._id)}>
+                  <Button
+                    deleted
+                    onClick={() => {
+                      alertShow({
+                        title: 'Bạn có muốn xóa vĩnh viễn bài viết này không?',
+                        navigateValue: config.routes.postTrash,
+                        buttonValue: 'Xóa vĩnh viễn',
+                        data: post._id,
+                        successFunction: destroyPost,
+                      });
+                    }}
+                    className={cx('action-btn')}
+                  >
                     Xóa vĩnh viễn
                   </Button>
                   <Button primary onClick={() => handleRestore(post._id)}>
@@ -95,17 +102,6 @@ function PostTrash() {
                 </div>
               </div>
             </div>
-            {showAlert && (
-              <Alert
-                data={{
-                  title: 'Bạn có muốn xóa bài viết này không',
-                  navigateValue: config.routes.posts,
-                  slug: post._id,
-                  success: destroyPost,
-                  cancel: setShowAlert,
-                }}
-              />
-            )}
           </div>
         ))}
       </div>

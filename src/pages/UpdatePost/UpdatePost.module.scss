@@ -10,6 +10,7 @@
 
 .form {
     padding: 0 24px;
+    margin-bottom: 24px;
 }
 .form-group {
     text-align: center;
@@ -28,11 +29,31 @@
 }
 
 .input {
+    font-size: 1.6rem;
     width: 100%;
     line-height: 1.8rem;
     min-height: 3.6rem;
     padding: 6px 4px;
     border: 1px solid #ccc;
+    &:focus {
+        border-color: var(--primary-color);
+    }
+}
+
+
+
+.input-area {
+    outline: none;
+    width: 100%;
+    line-height: 1.8rem;
+    font-size: 1.6rem;
+    min-height: 3.6rem;
+    padding: 6px 4px;
+    border: 1px solid #ccc;
+    font-family: 'roboto', sans-serif;
+    &:focus {
+        border-color: var(--primary-color);
+    }
 }
 
 .lable-imgs {
@@ -63,4 +84,20 @@
     width: 80px;
     height: 80px;
     object-fit: cover;
+}
+
+.btn-submit {
+
+}
+
+.btn-back {
+    margin: 0 24px;
+
+}
+
+.btn-back span {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--white-color);
 }

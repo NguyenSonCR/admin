@@ -10,6 +10,7 @@ import {
   ADD_CATEGORY_CHILDREN,
   DELETE_CATEGORY_CHILDREN,
   SET_CATEGORY_CHILD,
+  UPDATED_CATEGORY,
 } from './constants';
 import axiosJWT from '~/utils/setAxios';
 
@@ -60,6 +61,20 @@ function CategoryContextProvider({ children }) {
           type: ADD_CATEGORY,
           payload: response.data.category,
         });
+        return response.data;
+      }
+    } catch (error) {
+      return error.response.data ? error.response.data : { success: false, message: 'server error' };
+    }
+  };
+
+  // updated category
+  const updatedCategory = async (data) => {
+    const { id } = updatedCategory;
+    try {
+      const response = await axiosJWT.patch(`${apiUrl}/products/category/${id}/updated`, data);
+      if (response.data.success) {
+        dispatch({ type: UPDATED_CATEGORY, payload: response.data.category });
         return response.data;
       }
     } catch (error) {
@@ -122,6 +137,7 @@ function CategoryContextProvider({ children }) {
     chooseCategory,
     deleteCategoryChild,
     setCategoryChildren,
+    updatedCategory,
   };
 
   return <CategoryContext.Provider value={categoryContextData}>{children}</CategoryContext.Provider>;

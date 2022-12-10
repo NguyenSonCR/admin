@@ -39,12 +39,12 @@ function UpdateProduct() {
   // get one product with slug
   useEffect(() => {
     getProduct(slug);
+    // eslint-disable-next-line
   }, []);
 
   const [formValue, setFormValue] = useState({
     name: '',
     description: '',
-    productId: '',
     category: '',
     categoryChild: '',
     gender: '',
@@ -60,8 +60,7 @@ function UpdateProduct() {
     } // eslint-disable-next-line
   }, [product]);
 
-  const { name, description, productId, category, categoryChild, gender, priceOld, priceCurrent, saleOffLable } =
-    formValue;
+  const { name, description, category, categoryChild, gender, priceOld, priceCurrent, saleOffLable } = formValue;
 
   const {
     toastState: { toastList },
@@ -176,6 +175,7 @@ function UpdateProduct() {
       ...formValue,
       img: avatar,
     });
+    // eslint-disable-next-line
   }, [avatar]);
 
   useEffect(() => {
@@ -183,6 +183,7 @@ function UpdateProduct() {
       ...formValue,
       imgSlide: slideUrl,
     });
+    // eslint-disable-next-line
   }, [slideUrl]);
 
   const handleOnChangeImgSlide = (e) => {
@@ -279,7 +280,6 @@ function UpdateProduct() {
           setFormValue({
             name: '',
             description: '',
-            productId: '',
             category: '',
             categoryChild: '',
             gender: '',
@@ -325,7 +325,6 @@ function UpdateProduct() {
             setFormValue({
               name: '',
               description: '',
-              productId: '',
               category: '',
               categoryChild: '',
               gender: '',
@@ -372,7 +371,6 @@ function UpdateProduct() {
             setFormValue({
               name: '',
               description: '',
-              productId: '',
               category: '',
               categoryChild: '',
               gender: '',
@@ -421,7 +419,6 @@ function UpdateProduct() {
             setFormValue({
               name: '',
               description: '',
-              productId: '',
               category: '',
               categoryChild: '',
               gender: '',
@@ -466,21 +463,6 @@ function UpdateProduct() {
                 id="name"
                 placeholder=""
                 name="name"
-              />
-            </div>
-
-            <div className={cx('create__form-all')}>
-              <label className={cx('create__form-all-lable')} htmlFor="productId">
-                Mã sản phẩm:
-              </label>
-              <input
-                type="text"
-                className={cx('create__form-all-input')}
-                id="productId"
-                placeholder=""
-                name="productId"
-                onChange={onChangeForm}
-                value={productId}
               />
             </div>
 

@@ -70,6 +70,26 @@ const ProductContextProvider = ({ children }) => {
     }
   };
 
+  // delete image
+  const deleteImage = async (path) => {
+    try {
+      const response = await axiosJWT.delete(`${apiUrl}/image/delete/single`, path);
+      if (response.data.success) return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // delete images
+  const deleteImages = async (path) => {
+    try {
+      const response = await axiosJWT.delete(`${apiUrl}/image/delete/multiple`, path);
+      if (response.data.success) return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // get one product with slug
   const getProduct = async (slug) => {
     try {
@@ -226,6 +246,8 @@ const ProductContextProvider = ({ children }) => {
     sendCommentChildren,
     uploadFile,
     uploadFiles,
+    deleteImage,
+    deleteImages,
   };
 
   return <ProductContext.Provider value={productContextData}>{children}</ProductContext.Provider>;

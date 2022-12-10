@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { PostContext } from '~/contexts/PostContext';
 import config from '~/config';
 import Button from '~/components/Button';
-import Alert from '~/components/Alert';
+import { AlertContext } from '~/contexts/AlertContext';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +17,7 @@ function ProductDetail() {
     getPost,
     deletePost,
   } = useContext(PostContext);
+  const { alertShow } = useContext(AlertContext);
 
   const [postValue, setPostValue] = useState({
     title: '',
@@ -24,7 +25,7 @@ function ProductDetail() {
     content: '',
     img: '',
   });
-  const [showAlert, setShowAlert] = useState(false);
+
   useEffect(() => {
     getPost(slug).then((post) => {
       setPostValue(post);
@@ -33,10 +34,6 @@ function ProductDetail() {
   }, []);
 
   const { title, header, content, img } = postValue;
-
-  const handleDelete = (slug) => {
-    setShowAlert(true);
-  };
 
   let body = null;
   if (postLoading) {
@@ -59,8 +56,15 @@ function ProductDetail() {
           <Button
             deleted
             onClick={() => {
-              handleDelete(slug);
+              alertShow({
+                title: 'Bạn có muốn xóa bài viết này không?',
+                navigateValue: config.routes.posts,
+                buttonValue: 'Xóa',
+                data: slug,
+                successFunction: deletePost,
+              });
             }}
+            className={cx('btn-action')}
           >
             Xóa
           </Button>
@@ -69,17 +73,6 @@ function ProductDetail() {
             Quay lại
           </Button>
         </div>
-        {showAlert && (
-          <Alert
-            data={{
-              title: 'Bạn có muốn xóa bài viết này không',
-              navigateValue: config.routes.posts,
-              slug,
-              success: deletePost,
-              cancel: setShowAlert,
-            }}
-          />
-        )}
       </div>
     );
   }

@@ -48,7 +48,7 @@ function Header() {
     <header className={cx('wrapper', ['grid', 'wide'])}>
       <div className={cx('inner')}>
         <div className={cx('logo')}>
-          <Link to={config.routes.home}>
+          <Link to={config.routes.home} className={cx('logo-link')}>
             <img src={images.logo} alt="logo" className={cx('logo-img')}></img>
           </Link>
         </div>

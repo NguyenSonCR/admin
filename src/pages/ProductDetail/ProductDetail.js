@@ -7,7 +7,7 @@ import { AlertContext } from '~/contexts/AlertContext';
 import Spinner from '~/components/Spinner';
 import config from '~/config';
 import Button from '~/components/Button';
-import Comment from '~/layouts/components/Comment';
+import Comment from '~/components/Comment';
 
 const cx = classNames.bind(styles);
 
@@ -36,8 +36,6 @@ function ProductDetail() {
     const {
       name,
       description,
-      brand,
-      productId,
       img,
       imgSlide,
       priceOld,
@@ -72,7 +70,6 @@ function ProductDetail() {
                 <p className={cx('list')}> Giá hiện tại: </p>
                 <p className={cx('list')}> Giá cũ: </p>
                 <p className={cx('list')}> Giảm giá: </p>
-                <p className={cx('list')}> Mã sản phẩm:</p>
                 <p className={cx('list')}> Đã mua:</p>
                 <p className={cx('list')}> Đã đăng vào:</p>
                 <p className={cx('list')}> Đã chỉnh sửa vào:</p>
@@ -84,7 +81,6 @@ function ProductDetail() {
                 <p className={cx('list-value')}> {priceCurrent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</p>
                 <p className={cx('list-value')}> {priceOld.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</p>
                 <p className={cx('list-value')}> {saleOffPercent}%</p>
-                <p className={cx('list-value')}> {productId}</p>
                 <p className={cx('list-value')}> {bought}</p>
                 <p className={cx('list-value')}> {dateCreated}</p>
                 <p className={cx('list-value')}> {dateUpdated}</p>

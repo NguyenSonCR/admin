@@ -16,7 +16,7 @@ function Posts() {
     addPost,
   } = useContext(PostContext);
 
-  const { uploadFilesGoogle } = useContext(ProductContext);
+  const { uploadFiles } = useContext(ProductContext);
   const [formValue, setFormValue] = useState({
     title: '',
     header: '',
@@ -59,7 +59,7 @@ function Posts() {
     });
 
     try {
-      const response = await uploadFilesGoogle(data);
+      const response = await uploadFiles(data);
       return response;
     } catch (error) {
       console.log(error);

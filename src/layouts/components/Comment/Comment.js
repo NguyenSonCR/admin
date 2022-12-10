@@ -32,7 +32,7 @@ function Comment({ product }) {
         username: user.username,
         fullName: user.fullName,
         img: user.img,
-        productId: product.productId,
+        _id: product._id,
         text: formValue,
       });
       if (response.success) {
@@ -66,7 +66,7 @@ function Comment({ product }) {
     sendCommentChildren({
       username: user.username,
       fullName: user.fullName,
-      productId: product.productId,
+      _id: product._id,
       commentId: item._id,
       img: user.img,
       text: children,
@@ -172,7 +172,7 @@ function Comment({ product }) {
               <div className={cx('action')}>
                 <FontAwesomeIcon
                   icon={faTrash}
-                  onClick={() => deleteComment({ productId: product.productId, comment: item })}
+                  onClick={() => deleteComment({ _id: product._id, comment: item })}
                   className={cx('delete')}
                 />
               </div>

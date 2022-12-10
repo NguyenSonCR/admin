@@ -1,0 +1,194 @@
+
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 24px 12px;
+}
+
+.title span {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    padding: 24px 12px;
+}
+
+.comment-item {
+    background-color: var(--background-color);
+    margin: 12px 0 16px 0;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    background-color: var(--white-color);
+}
+
+
+.client {
+    background-color: var(--white-color);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user {
+    margin: 0 4px;
+    display: flex;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
+.parent {
+    margin: 0 4px;
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    background-color: var(--background-color);
+}
+
+.children {
+    margin-left: 24px;
+}
+
+.children-wrapper {
+    margin-bottom: 12px;
+}
+
+.user-name {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    padding: 0 6px;
+}
+.user-img {
+    margin: 0 6px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.reply {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+.reply-text {
+    margin-right: 48px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 6px 24px;
+    
+    &:hover {
+        cursor: pointer;
+        color: var(--primary-color);
+    }
+    background-color: var(--background-color);
+    border-radius: 12px;
+}
+
+.comment-text {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 6px;
+}
+
+.comment-date {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--text-color);
+    padding: 6px;
+}
+
+.add-comment {
+    margin: 24px 0 24px 0;
+    background-color:var(--background-color);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white-color);
+    padding: 0 12px;
+}
+
+.label {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 12px 8px;
+    background-color: var(--white-color);
+}
+.input {
+    border: 1px solid #ccc;
+    padding: 12px;
+    outline: none;
+    &:focus {
+        border-color: var(--primary-color);
+    }
+    font-family: 'roboto', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.btn {
+    width: 120px;
+    margin-left: 24px;
+}
+
+.btn-submit {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 24px;
+}
+.label-img {
+    margin: 8px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    cursor: pointer;
+}
+
+.imgs-preview {
+    width: 100px;
+    object-fit: contain;
+}
+
+.comment-img {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.comment-img-tag {
+    width: 100px;
+    object-fit: contain;
+    margin: 2px;
+}
+
+.sendcomment-action {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 24px;
+}
+
+.btn-delete {
+    cursor: pointer;
+    padding: 8px;
+    color: var(--text-color);
+    opacity: 0.6;
+}

@@ -90,7 +90,7 @@ export const productReducer = (state, action) => {
         ...state,
         products: state.products.map((product) => {
           const condition = payload.forEach((item) => {
-            if (product.productId === item.productId) {
+            if (product._id === item._id) {
               return item;
             } else {
               return false;

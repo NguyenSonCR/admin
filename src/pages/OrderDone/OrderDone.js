@@ -69,48 +69,50 @@ function OrderDone() {
 
   if (currentPage && currentPage.length > 0) {
     body = (
-      <div className={cx('wrapper')}>
+      <div className={cx('wrapper-order')}>
         <div className={cx('header')}> Trang quản lý đơn hàng </div>
-        {currentPage.map((order, index) => (
-          <div key={index} className={cx('order')}>
-            <div className={cx('user')}>
-              <div className={cx('user-list')}> Mã đơn hàng: {order._id}</div>
-              <div className={cx('user-list')}> Tên khách hàng: {order.user.fullName} </div>
-              <div className={cx('user-list')}> Địa chỉ giao hàng: {order.user.address}</div>
-              <div className={cx('user-list')}> Số điện thoại khách hàng: {order.user.phoneNumber} </div>
-            </div>
-
-            {order.checkout.map((item, index) => (
-              <div key={index} className={cx('product')}>
-                <div className={cx('product-header')}>
-                  <img className={cx('product-img')} src={item.product.img} alt={item.product.name}></img>
-                  <div className={cx('product-list')}>{item.product.name} </div>
-                </div>
-
-                <div className={cx('product-list')}> Số lượng: {item.amount}</div>
-                <div className={cx('product-list')}>
-                  Giá: {item.priceCurrent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
-                </div>
-                <div className={cx('product-list')}>
-                  Tổng: {(item.amount * item.priceCurrent).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
-                </div>
+        <div className={cx('order-page')}>
+          {currentPage.map((order, index) => (
+            <div key={index} className={cx('order')}>
+              <div className={cx('user')}>
+                <div className={cx('user-list')}> Mã đơn hàng: {order._id}</div>
+                <div className={cx('user-list')}> Tên khách hàng: {order.user.fullName} </div>
+                <div className={cx('user-list')}> Địa chỉ giao hàng: {order.user.address}</div>
+                <div className={cx('user-list')}> Số điện thoại khách hàng: {order.user.phoneNumber} </div>
               </div>
-            ))}
-            <div className={cx('action')}>
-              <Button deleted onClick={() => handleDeleteOrder(order._id)}>
-                Xóa đơn hàng
-              </Button>
-            </div>
-          </div>
-        ))}
 
-        <Pagination
-          totalProducts={ordersDone.length}
-          onChange={pageChange}
-          currentPage={pageNumber}
-          onPreviousPage={onPreviousPage}
-          onNextPage={onNextPage}
-        />
+              {order.checkout.map((item, index) => (
+                <div key={index} className={cx('product')}>
+                  <div className={cx('product-header')}>
+                    <img className={cx('product-img')} src={item.product.img} alt={item.product.name}></img>
+                    <div className={cx('product-list')}>{item.product.name} </div>
+                  </div>
+
+                  <div className={cx('product-list')}> Số lượng: {item.amount}</div>
+                  <div className={cx('product-list')}>
+                    Giá: {item.priceCurrent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+                  </div>
+                  <div className={cx('product-list')}>
+                    Tổng: {(item.amount * item.priceCurrent).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+                  </div>
+                </div>
+              ))}
+              <div className={cx('action')}>
+                <Button deleted onClick={() => handleDeleteOrder(order._id)}>
+                  Xóa đơn hàng
+                </Button>
+              </div>
+            </div>
+          ))}
+
+          <Pagination
+            totalProducts={ordersDone.length}
+            onChange={pageChange}
+            currentPage={pageNumber}
+            onPreviousPage={onPreviousPage}
+            onNextPage={onNextPage}
+          />
+        </div>
       </div>
     );
   } else {

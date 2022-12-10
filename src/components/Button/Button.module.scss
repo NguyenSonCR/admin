@@ -2,6 +2,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    color: var(--text-color);
     font-size: 1.6rem;
     min-width: 100px;
     font-weight: 400;
@@ -145,6 +146,32 @@
     box-shadow: 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.2);
     transition: transfrom linear 0.1s;
     will-change: transfrom;
+}
+
+.fill {
+    min-width: 124px;
+    height: 34px;
+    text-decoration: none;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    padding: 0 12px;
+    outline: none;
+    cursor: pointer;
+    color: var(--white-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 999px;
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 8px 14px 0 rgba(0,0,0,0.19);
+    background-color: var(--primary-color);
+    border: 1px solid rgba(24, 122, 68, 1);
+    
+    &:hover {
+        background-color: rgb(41, 151, 90);
+        box-shadow: 0 8px 12px 0 rgba(0,0,0,0.24), 0 14px 30px 0 rgba(0,0,0,0.19);
+        color: var(--white-color)
+    }
 }
 
 

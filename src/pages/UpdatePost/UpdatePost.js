@@ -6,6 +6,8 @@ import { PostContext } from '~/contexts/PostContext';
 import { ProductContext } from '~/contexts/ProductContext';
 import { ToastContext } from '~/contexts/ToastContext';
 import _ from 'lodash';
+import Button from '~/components/Button';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 function Posts() {
@@ -21,7 +23,7 @@ function Posts() {
     addToast,
   } = useContext(ToastContext);
 
-  const { uploadFilesGoogle } = useContext(ProductContext);
+  const { uploadFiles } = useContext(ProductContext);
 
   const [formValue, setFormValue] = useState({
     title: '',
@@ -79,7 +81,7 @@ function Posts() {
     });
 
     try {
-      const response = await uploadFilesGoogle(data);
+      const response = await uploadFiles(data);
       return response;
     } catch (error) {
       console.log(error);
@@ -89,7 +91,7 @@ function Posts() {
   let navigate = useNavigate();
   const addPostSubmit = async (event) => {
     event.preventDefault();
-    if (!files || !header || !content) {
+    if (!header || !content) {
       addToast({
         id: toastList.length + 1,
         title: 'Thất bại',
@@ -99,9 +101,8 @@ function Posts() {
       return;
     }
     try {
-      const response = await handleUploadFile(files);
-      if (response.success) {
-        const postData = await updatePost({ ...formValue, img: response.result });
+      if (!files) {
+        const postData = await updatePost({ ...formValue, img: imgs });
         if (postData.success) {
           addToast({
             id: toastList.length + 1,
@@ -127,13 +128,42 @@ function Posts() {
           return;
         }
       } else {
-        addToast({
-          id: toastList.length + 1,
-          title: 'Thất bại',
-          content: response.message,
-          type: 'error',
-        });
-        return;
+        const response = await handleUploadFile(files);
+        if (response.success) {
+          const postData = await updatePost({ ...formValue, img: response.result });
+          if (postData.success) {
+            addToast({
+              id: toastList.length + 1,
+              title: 'Thành công',
+              content: postData.message,
+              type: 'success',
+            });
+            navigate(-1);
+            setFormValue({
+              title: '',
+              header: '',
+              content: '',
+            });
+            setFiles();
+            setImgs();
+          } else {
+            addToast({
+              id: toastList.length + 1,
+              title: 'Thất bại',
+              content: postData.message,
+              type: 'error',
+            });
+            return;
+          }
+        } else {
+          addToast({
+            id: toastList.length + 1,
+            title: 'Thất bại',
+            content: response.message,
+            type: 'error',
+          });
+          return;
+        }
       }
     } catch (error) {
       console.log(error);
@@ -149,19 +179,41 @@ function Posts() {
           <label htmlFor="title" className={cx('lable')}>
             Tiêu đề bài viết
           </label>
-          <input className={cx('input')} value={title} onChange={onChangeForm} name="title" id="title" />
+          <input
+            className={cx('input')}
+            spellCheck={false}
+            value={title}
+            onChange={onChangeForm}
+            name="title"
+            id="title"
+          />
         </div>
         <div className={cx('form-group')}>
           <label htmlFor="header" className={cx('lable')}>
             Header
           </label>
-          <input className={cx('input')} value={header} onChange={onChangeForm} name="header" id="header" />
+          <input
+            className={cx('input')}
+            spellCheck={false}
+            value={header}
+            onChange={onChangeForm}
+            name="header"
+            id="header"
+          />
         </div>
         <div className={cx('form-group')}>
           <label htmlFor="content" className={cx('lable')}>
             Nội dung bài viết
           </label>
-          <input className={cx('input')} value={content} onChange={onChangeForm} name="content" id="content" />
+          <textarea
+            className={cx('input-area')}
+            spellCheck={false}
+            value={content}
+            onChange={onChangeForm}
+            rows="8"
+            name="content"
+            id="content"
+          />
         </div>
         <div className={cx('form-group-img')}>
           <label htmlFor="img" className={cx('lable-imgs')}>
@@ -180,9 +232,14 @@ function Posts() {
         <div className={cx('imgs-preview')}>
           {imgs && imgs.map((url, index) => <img key={index} className={cx('imgs')} src={url} alt=""></img>)}
         </div>
-        <button type="submit" className={cx(['btn', 'btn--primary'])}>
-          Lưu lại
-        </button>
+        <div className={cx('action')}>
+          <Button to={`${config.routes.posts}/${slug}`} fill className={cx('btn-back')}>
+            <span>Quay lại</span>
+          </Button>
+          <Button type="submit" fill className={cx('btn-submit')}>
+            Lưu lại
+          </Button>
+        </div>
       </form>
     </div>
   );
