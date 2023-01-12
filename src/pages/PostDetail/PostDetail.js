@@ -43,10 +43,12 @@ function ProductDetail() {
       <div className={cx('wrapper')}>
         <h4 className={cx('title')}>{title}</h4>
         <p className={cx('header')}>{header}</p>
-        <p className={cx('content')}>{content}</p>
-        <div className={cx('imgs')}>
-          {img && img.map((url, index) => <img key={index} className={cx('img')} src={url} alt={title}></img>)}
-        </div>
+        <div
+          className={cx('content', ['ql-editor'])}
+          dangerouslySetInnerHTML={{
+            __html: content,
+          }}
+        ></div>
 
         <div className={cx('action')}>
           <Button primary to={`${config.routes.posts}/${slug}/update`} className={cx['btn']}>

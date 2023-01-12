@@ -1,13 +1,15 @@
-import classNames from 'classnames/bind';
-import { useState, useContext } from 'react';
+import { useState, useContext, useMemo, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import _ from 'lodash';
+import classNames from 'classnames/bind';
 import styles from './NewPost.module.scss';
+
 import config from '~/config';
 import { PostContext } from '~/contexts/PostContext';
 import Button from '~/components/Button';
 import { ToastContext } from '~/contexts/ToastContext';
 import { ProductContext } from '~/contexts/ProductContext';
-import _ from 'lodash';
 
 const cx = classNames.bind(styles);
 function Posts() {
@@ -16,13 +18,12 @@ function Posts() {
     addPost,
   } = useContext(PostContext);
 
-  const { uploadFiles } = useContext(ProductContext);
+  const { uploadFiles, uploadFile } = useContext(ProductContext);
   const [formValue, setFormValue] = useState({
     title: '',
     header: '',
-    content: '',
   });
-  const { title, header, content } = formValue;
+  const { title, header } = formValue;
   const onChangeForm = (event) => {
     setFormValue({
       ...formValue,
@@ -74,11 +75,11 @@ function Posts() {
   let navigate = useNavigate();
   const addPostSubmit = async (event) => {
     event.preventDefault();
-    if (!files || !title || !header || !content) {
+    if (!files || !title || !header) {
       addToast({
         id: toastList.length + 1,
         title: 'Thất bại',
-        content: 'Bạn chưa nhập thông tin bài viết',
+        content: 'Bạn chưa nhập thông tin bài viết và hình ảnh',
         type: 'warning',
       });
       return;
@@ -86,7 +87,7 @@ function Posts() {
     try {
       const responseUpdatedImgs = await handleUploadFile(files);
       if (responseUpdatedImgs.success) {
-        const response = await addPost({ ...formValue, img: responseUpdatedImgs.result });
+        const response = await addPost({ ...formValue, content: valueDescription, img: responseUpdatedImgs.result });
         if (response.success) {
           addToast({
             id: toastList.length + 1,
@@ -98,7 +99,6 @@ function Posts() {
           setFormValue({
             title: '',
             header: '',
-            content: '',
             img: '',
           });
         } else {
@@ -109,6 +109,7 @@ function Posts() {
             type: 'error',
           });
         }
+        setValueDescription('');
         setFiles();
         setImgs();
       } else {
@@ -123,6 +124,71 @@ function Posts() {
       console.log(error);
     }
   };
+
+  // editor
+  const [valueDescription, setValueDescription] = useState('');
+  const imageHandler = (e) => {
+    const editor = quillRef.current.getEditor();
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('multiple', true);
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+
+      if (/^image\//.test(file.type)) {
+        let dataSingle = new FormData();
+        const imgId = uuidv4();
+        const blob = file.slice(0, file.size, 'image/jpeg');
+        const newFile = new File([blob], `${imgId}_product.jpeg`, { type: 'image/jpeg' });
+        dataSingle.append('file', newFile);
+
+        try {
+          const responseSingle = await uploadFile(dataSingle);
+          const url = responseSingle.success && responseSingle.result;
+          editor.insertEmbed(editor.getSelection(), 'image', url);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        alert('You could only upload images');
+      }
+    };
+  };
+  const toolbarOptions = [
+    [{ font: [] }],
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+    ['blockquote', 'code-block'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+    [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ align: [] }],
+    ['link', 'image', 'video'],
+    ['clean'], // remove formatting button
+  ];
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: toolbarOptions,
+        handlers: {
+          image: imageHandler,
+        },
+      },
+    }),
+    // eslint-disable-next-line
+    [],
+  );
+
+  const quillRef = useRef();
+  useEffect(() => {
+    quillRef.current?.editor.root.setAttribute('spellcheck', 'false');
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div>
@@ -144,31 +210,30 @@ function Posts() {
         </div>
         <div className={cx('form-group')}>
           <label htmlFor="header" className={cx('lable')}>
-            Header
+            Miêu tả
           </label>
           <input
             className={cx('input')}
-            type="text"
             spellCheck={false}
+            type="text"
             value={header}
             onChange={onChangeForm}
             name="header"
             id="header"
           />
         </div>
+
         <div className={cx('form-group')}>
           <label htmlFor="content" className={cx('lable')}>
             Nội dung bài viết
           </label>
-          <textarea
-            spellCheck="false"
-            rows="8"
-            className={cx('text-area')}
-            value={content}
-            onChange={onChangeForm}
-            name="content"
-            id="content"
-          ></textarea>
+          <ReactQuill
+            theme="snow"
+            ref={quillRef}
+            value={valueDescription}
+            modules={modules}
+            onChange={setValueDescription}
+          />
         </div>
         <div className={cx('form-group-img')}>
           <label htmlFor="img" className={cx('lable-imgs')}>

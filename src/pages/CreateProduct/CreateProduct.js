@@ -1,14 +1,16 @@
 import classNames from 'classnames/bind';
 import styles from './CreateProduct.module.scss';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useMemo, useRef } from 'react';
+import ReactQuill from 'react-quill';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import _ from 'lodash';
+
 import { ProductContext } from '~/contexts/ProductContext';
 import config from '~/config';
 import { CategoryContext } from '~/contexts/CategoryContext';
 import Button from '~/components/Button';
 import { ToastContext } from '~/contexts/ToastContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import _ from 'lodash';
 import ProductItemPreview from '~/components/ProductItemPreview';
 
 const cx = classNames.bind(styles);
@@ -29,7 +31,6 @@ function CreateProduct() {
 
   const [formValue, setFormValue] = useState({
     name: '',
-    description: '',
     category: '',
     categoryChild: '',
     gender: '',
@@ -39,7 +40,7 @@ function CreateProduct() {
     saleOffLable: '',
   });
 
-  const { name, description, category, categoryChild, gender, priceOld, priceCurrent, saleOffLable } = formValue;
+  const { name, category, categoryChild, gender, priceOld, priceCurrent, saleOffLable } = formValue;
 
   const onChangeForm = (event) => {
     event.preventDefault();
@@ -209,7 +210,7 @@ function CreateProduct() {
 
   const addProductSubmit = async (event) => {
     event.preventDefault();
-    if (!name || !description) {
+    if (!name || !valueDescription) {
       addToast({
         id: toastList.length + 1,
         title: 'Thất bại',
@@ -233,6 +234,7 @@ function CreateProduct() {
       if (uploadImg.responseSingle.success && uploadImg.response.success) {
         const data = {
           ...formValue,
+          description: valueDescription,
           img: uploadImg.responseSingle.result,
           imgSlide: uploadImg.response.result,
           saleOffPercent: percent,
@@ -241,7 +243,6 @@ function CreateProduct() {
         if (response.success) {
           setFormValue({
             name: '',
-            description: '',
             category: '',
             categoryChild: '',
             gender: '',
@@ -256,11 +257,13 @@ function CreateProduct() {
             content: response.message,
             type: 'success',
           });
+
           setFiles();
           setFile();
           setAmountImg();
           setAvatar();
           setSlideImg([]);
+          setValueDescription('');
           setCreatedLoading(false);
         } else {
           addToast({
@@ -276,6 +279,74 @@ function CreateProduct() {
       console.log(error);
     }
   };
+
+  // rich editor
+  const [valueDescription, setValueDescription] = useState('');
+  const imageHandler = (e) => {
+    const editor = quillRef.current.getEditor();
+    console.log(editor);
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('multiple', true);
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+
+      if (/^image\//.test(file.type)) {
+        console.log(file);
+        let dataSingle = new FormData();
+        const imgId = uuidv4();
+        const blob = file.slice(0, file.size, 'image/jpeg');
+        const newFile = new File([blob], `${imgId}_product.jpeg`, { type: 'image/jpeg' });
+        dataSingle.append('file', newFile);
+
+        try {
+          const responseSingle = await uploadFile(dataSingle);
+          console.log(responseSingle);
+          const url = responseSingle.success && responseSingle.result;
+          editor.insertEmbed(editor.getSelection(), 'image', url);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        alert('You could only upload images');
+      }
+    };
+  };
+  const toolbarOptions = [
+    [{ font: [] }],
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+    ['blockquote', 'code-block'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+    [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ align: [] }],
+    ['link', 'image', 'video'],
+    ['clean'], // remove formatting button
+  ];
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: toolbarOptions,
+        handlers: {
+          image: imageHandler,
+        },
+      },
+    }),
+    // eslint-disable-next-line
+    [],
+  );
+
+  const quillRef = useRef();
+  useEffect(() => {
+    quillRef.current?.editor.root.setAttribute('spellcheck', 'false');
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className={cx('create-product')}>
@@ -307,16 +378,14 @@ function CreateProduct() {
             <label className={cx('create__form-all-lable')} htmlFor="description">
               Mô tả sản phẩm:
             </label>
-            <textarea
-              spellCheck="false"
-              rows="4"
-              className={cx('create__form-all-input')}
-              id="description"
-              placeholder=""
-              name="description"
-              value={description}
-              onChange={onChangeForm}
-            ></textarea>
+
+            <ReactQuill
+              theme="snow"
+              ref={quillRef}
+              value={valueDescription}
+              modules={modules}
+              onChange={setValueDescription}
+            />
           </div>
 
           <div className={cx('create__form-all')} onClick={(e) => e.stopPropagation()}>

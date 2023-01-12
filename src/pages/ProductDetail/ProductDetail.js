@@ -102,7 +102,13 @@ function ProductDetail() {
         <div className={cx(['row'])}>
           <div className={cx(['col', 'l-12', 'm-12', 'c-12'])}>
             <h4 className={cx('title')}> Mô tả sản phẩm: </h4>
-            <p className={cx('list')}>{description}</p>
+
+            <div
+              className={cx('create__form-all-input', ['ql-editor'])}
+              dangerouslySetInnerHTML={{
+                __html: description,
+              }}
+            />
           </div>
         </div>
         <div className={cx(['row'])}>

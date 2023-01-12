@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useMemo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+
 import styles from './UpdatePost.module.scss';
 import { PostContext } from '~/contexts/PostContext';
 import { ProductContext } from '~/contexts/ProductContext';
@@ -23,12 +25,11 @@ function Posts() {
     addToast,
   } = useContext(ToastContext);
 
-  const { uploadFiles } = useContext(ProductContext);
+  const { uploadFiles, uploadFile } = useContext(ProductContext);
 
   const [formValue, setFormValue] = useState({
     title: '',
     header: '',
-    content: '',
   });
 
   useEffect(() => {
@@ -91,7 +92,7 @@ function Posts() {
   let navigate = useNavigate();
   const addPostSubmit = async (event) => {
     event.preventDefault();
-    if (!header || !content) {
+    if (!header) {
       addToast({
         id: toastList.length + 1,
         title: 'Thất bại',
@@ -102,7 +103,7 @@ function Posts() {
     }
     try {
       if (!files) {
-        const postData = await updatePost({ ...formValue, img: imgs });
+        const postData = await updatePost({ ...formValue, content: valueContent, img: imgs });
         if (postData.success) {
           addToast({
             id: toastList.length + 1,
@@ -114,7 +115,6 @@ function Posts() {
           setFormValue({
             title: '',
             header: '',
-            content: '',
           });
           setFiles();
           setImgs();
@@ -130,7 +130,7 @@ function Posts() {
       } else {
         const response = await handleUploadFile(files);
         if (response.success) {
-          const postData = await updatePost({ ...formValue, img: response.result });
+          const postData = await updatePost({ ...formValue, content: valueContent, img: response.result });
           if (postData.success) {
             addToast({
               id: toastList.length + 1,
@@ -142,7 +142,6 @@ function Posts() {
             setFormValue({
               title: '',
               header: '',
-              content: '',
             });
             setFiles();
             setImgs();
@@ -170,7 +169,79 @@ function Posts() {
     }
   };
 
-  const { title, header, content } = formValue;
+  const { title, header } = formValue;
+
+  // editor
+  const [valueContent, setValueContent] = useState('');
+  useEffect(() => {
+    if (!postsLoading) {
+      setValueContent(post.content);
+    }
+    // eslint-disable-next-line
+  }, [postsLoading]);
+  const imageHandler = (e) => {
+    const editor = quillRef.current.getEditor();
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('multiple', true);
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+
+      if (/^image\//.test(file.type)) {
+        let dataSingle = new FormData();
+        const imgId = uuidv4();
+        const blob = file.slice(0, file.size, 'image/jpeg');
+        const newFile = new File([blob], `${imgId}_product.jpeg`, { type: 'image/jpeg' });
+        dataSingle.append('file', newFile);
+
+        try {
+          const responseSingle = await uploadFile(dataSingle);
+          const url = responseSingle.success && responseSingle.result;
+          editor.insertEmbed(editor.getSelection(), 'image', url);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        alert('You could only upload images');
+      }
+    };
+  };
+  const toolbarOptions = [
+    [{ font: [] }],
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+    ['blockquote', 'code-block'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+    [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ align: [] }],
+    ['link', 'image', 'video'],
+    ['clean'], // remove formatting button
+  ];
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: toolbarOptions,
+        handlers: {
+          image: imageHandler,
+        },
+      },
+    }),
+    // eslint-disable-next-line
+    [],
+  );
+
+  const quillRef = useRef();
+  useEffect(() => {
+    quillRef.current?.editor.root.setAttribute('spellcheck', 'false');
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div>
       <h4 className={cx('title')}>Chỉnh sửa bài viết</h4>
@@ -190,7 +261,7 @@ function Posts() {
         </div>
         <div className={cx('form-group')}>
           <label htmlFor="header" className={cx('lable')}>
-            Header
+            Mô tả
           </label>
           <input
             className={cx('input')}
@@ -205,15 +276,7 @@ function Posts() {
           <label htmlFor="content" className={cx('lable')}>
             Nội dung bài viết
           </label>
-          <textarea
-            className={cx('input-area')}
-            spellCheck={false}
-            value={content}
-            onChange={onChangeForm}
-            rows="8"
-            name="content"
-            id="content"
-          />
+          <ReactQuill theme="snow" ref={quillRef} value={valueContent} modules={modules} onChange={setValueContent} />
         </div>
         <div className={cx('form-group-img')}>
           <label htmlFor="img" className={cx('lable-imgs')}>
