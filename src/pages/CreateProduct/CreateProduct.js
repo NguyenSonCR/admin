@@ -284,7 +284,6 @@ function CreateProduct() {
   const [valueDescription, setValueDescription] = useState('');
   const imageHandler = (e) => {
     const editor = quillRef.current.getEditor();
-    console.log(editor);
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.setAttribute('multiple', true);
@@ -293,9 +292,7 @@ function CreateProduct() {
 
     input.onchange = async () => {
       const file = input.files[0];
-
       if (/^image\//.test(file.type)) {
-        console.log(file);
         let dataSingle = new FormData();
         const imgId = uuidv4();
         const blob = file.slice(0, file.size, 'image/jpeg');
@@ -304,9 +301,12 @@ function CreateProduct() {
 
         try {
           const responseSingle = await uploadFile(dataSingle);
-          console.log(responseSingle);
-          const url = responseSingle.success && responseSingle.result;
-          editor.insertEmbed(editor.getSelection(), 'image', url);
+          if (responseSingle.success) {
+            const url = responseSingle.success && responseSingle.result;
+            const index = editor.getSelection()?.index; // get cursor position
+            editor.insertEmbed(index, 'image', url);
+            return;
+          }
         } catch (error) {
           console.log(error);
         }
@@ -343,6 +343,7 @@ function CreateProduct() {
   );
 
   const quillRef = useRef();
+
   useEffect(() => {
     quillRef.current?.editor.root.setAttribute('spellcheck', 'false');
     // eslint-disable-next-line

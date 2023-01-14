@@ -148,7 +148,7 @@ function Posts() {
         try {
           const responseSingle = await uploadFile(dataSingle);
           const url = responseSingle.success && responseSingle.result;
-          editor.insertEmbed(editor.getSelection(), 'image', url);
+          editor.insertEmbed(editor.getSelection()?.index, 'image', url);
         } catch (error) {
           console.log(error);
         }

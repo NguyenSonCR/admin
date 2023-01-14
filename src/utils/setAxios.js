@@ -3,7 +3,7 @@ import { LOCAL_STORAGE_TOKEN_NAME_ACCESS, LOCAL_STORAGE_TOKEN_NAME_REFRESH } fro
 import { apiUrl } from '~/contexts/constants';
 import jwt_decode from 'jwt-decode';
 
-const axiosJWT = axios.create();
+const axiosJWT = axios.create({});
 
 const refreshToken = async () => {
   try {
